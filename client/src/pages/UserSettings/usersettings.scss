@@ -1,6 +1,6 @@
 @use "../../scss/"as *;
 .settings {
-    margin: 0 215px 30px 60px;
+    margin: 0 0px 30px 0px;
     &__cover{
         height: 170px;
         margin-bottom: 20px;
@@ -200,6 +200,7 @@
            }
     }
     &__flex-top{
+       
         display: flex;
         gap: 0 30px;
         margin-bottom: 20px;
@@ -347,4 +348,16 @@ input[type=number]::-webkit-outer-spin-button {
 .PiNick {
 color: purple;
 margin-top: 20px;
+}
+.withdraw {
+   margin-top: 33px;
+    
+    gap: 0 10px;
+    font-size: 16px;
+    color: $white;
+    padding: 10px;
+    background-color: rgb(193, 66, 225);
+    opacity: 1;
+    cursor:pointer;    
+    border-radius: 5px;
 }
