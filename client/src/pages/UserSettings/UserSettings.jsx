@@ -240,7 +240,7 @@ const UserSettings = () => {
        else if (aa.mobile && aa.mail) {
         // openModal(<div>{t("updating")}</div>); 
                 setIsLoading(true);
-                const balance = aa.mobile - 0.1; 
+                const balance = aa.mobile; 
                 const mail = aa.mail;
                 try {
                    
