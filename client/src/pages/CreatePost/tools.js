@@ -25,7 +25,12 @@ const Config = () => {
             list: List,
             warning: Warning,
             code: Code,
-            linkTool: LinkTool,
+            linkTool: {
+                class: LinkTool,
+                config: {
+                  endpoint: 'https://piora.space/api/v1/search/link',
+                }
+            },
             image: {
                 class: ImageTool,
                 config: {

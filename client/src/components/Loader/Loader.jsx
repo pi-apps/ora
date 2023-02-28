@@ -1,7 +1,7 @@
 import React, { useLayoutEffect } from "react";
 import S from "./Loader.module.css";
 import { useTranslation } from "react-i18next";
-const Loader = () => {
+export const Loader = () => {
     const { t, i18n } = useTranslation();
     useLayoutEffect(() => {
         window.document.documentElement.scrollTo(0, 0);
@@ -32,4 +32,12 @@ const Loader = () => {
     );
 };
 
-export default Loader;
+export const HomeLoader = () => {
+ 
+
+    return (
+        <div className={S.ContainerHomeLoader}>
+            <div className={S.HomeLoader}></div>
+      </div>
+    );
+};

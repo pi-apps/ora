@@ -445,14 +445,14 @@ export const authMail = async (req, res, next) => {
         const token = jwt.sign(otp, process.env.APP_SECRET)
         res.status(200).json({
             status: 'OK',
-            data: "Xác thực tài khoản Pi Network thành công"
+            data: "authpidone"
         });
         
         }
         else {
             res.status(200).json({
                 status: 'Dublicated',
-                data: "Tài khoản Pi Network này đã được đăng ký trước đó!",
+                data: "dublicatedpiacc",
             });
         }
     
@@ -476,7 +476,7 @@ export const confirmEmail = async (req, res, next) => {
         else{
             res.status(500).json({
                 status: 'ERR',
-                data: "Mã OTP bạn nhập không chính xác"
+                data: "Wrong"
             });
         }
     } catch (error) {
@@ -504,7 +504,7 @@ export const userSavedPost = async (req, res, next) => {
             })
             res.status(200).json({
                 status: 'success',
-                data: "Bài viết đã được lưu lại thành công",
+                data: "Post Saved",
             })
         }
         else if (find.length !== 0){
@@ -519,7 +519,7 @@ export const userSavedPost = async (req, res, next) => {
             })
             res.status(500).json({
                 status: 'OK',
-                data: "Bỏ lưu thành công",
+                data: "Delete saved post",
             })
         }
 

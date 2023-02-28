@@ -7,6 +7,7 @@ import * as actions from "../../redux/actions";
 import "./header.scss";
 import Notifications from "../../components/Notifications/Notifications";
 import { useTranslation } from "react-i18next";
+import useMediaQuery from "../../hooks/useMedia";
 const Header = () => {
     const listRef = useRef();
     const [searchParams, setSearchParams] = useSearchParams();
@@ -30,6 +31,26 @@ const Header = () => {
     const location = useLocation();
     const path = location.pathname.split("/")[3];
     const { t, i18n } = useTranslation();
+    async function markAsRead()  {     
+       
+            console.log("Noti")
+        const token = localStorage.getItem("token");
+        if (token) {
+            try {
+                    const option = {
+                    method: "get",
+                    url: `/api/v1/notifications/readall`,
+                    headers: {
+                        authorization: `Bearer ${token}`,
+                    },
+                };
+                 axios(option);
+            
+           } catch (err) {}
+        }
+    };
+
+  
     useEffect(() => {
         if (listRef.current) {
             const slider = listRef.current;
@@ -229,6 +250,7 @@ const Header = () => {
             );
         }
     }, [notifications, countNotifications]);
+ 
     useEffect(() => {
         if (notiId) {
             getAllNotifications();
@@ -253,6 +275,9 @@ const Header = () => {
     useEffect(() => {
         getNotificationsMessage();
     }, [getNotificationsMessage]);
+
+    const isMobile = useMediaQuery("(max-width: 600px)");
+
     return location.pathname !== "/category" ? (
         location.pathname !== "/login" &&
         location.pathname !== "/register" &&
@@ -323,11 +348,16 @@ const Header = () => {
                                                 {showNotify && (
                                                     <div className="header__notify">
                                                         <div className="header__notify-container">
+                                                            
                                                             <header className="header__notify-header">
                                                                 <h3>{t("notification")}</h3>
+                                                         
                                                             </header>
+                                                         
                                                             <div className="header__notify-wrapper">
+                                                             
                                                                 <ul className="header__notify-list">
+                                                            
                                                                     {notifications.length !== 0
                                                                         ? notifications.map((notification) => (
                                                                               <Notifications
@@ -335,11 +365,12 @@ const Header = () => {
                                                                                   key={notification._id}
                                                                               />
                                                                           ))
-                                                                        : t("nothinghere") }
+                                                                        : t("nothinghere")}
                                                                 </ul>
                                                             </div>
                                                             <footer className="header__notify-footer">
-                                                                <p>{t("more")}</p>
+                                                          
+                                                                <p onClick={markAsRead()}>{t("markasread")}</p>
                                                             </footer>
                                                         </div>
                                                     </div>
@@ -384,14 +415,16 @@ const Header = () => {
                                                                             : currentUser.currentUser.userName}
                                                                     </p>
                                                                     <span className="header__dropdown-phone">
-                                                                    <Link
-                                                                        to="/user/settings#piBalance"
-                                                                        className="header__dropdown-link p-10"
-                                                                    > 
-                                                                    {t("balance")+": "}
-                                                                        {currentUser.currentUser.mobile
-                                                                            ? currentUser.currentUser.mobile
-                                                                            : "0" } Pi</Link>
+                                                                        <Link
+                                                                            to="/user/settings#piBalance"
+                                                                            className="header__dropdown-link p-10"
+                                                                        >
+                                                                            {t("balance") + ": "}
+                                                                            {currentUser.currentUser.mobile
+                                                                                ? currentUser.currentUser.mobile
+                                                                                : "0"}{" "}
+                                                                            Pi
+                                                                        </Link>
                                                                     </span>
                                                                 </div>
                                                             </Link>
@@ -555,27 +588,45 @@ const Header = () => {
                                 )}
                             </div>
                             <div className="header__member">
-                                {/* <Link to="/" className="header__title no-wrap">
-                  THÀNH VIÊN NỔI BẬT
-                </Link> */}
                             </div>
                             <div className="header__menu-category">
                                 <div className="header__menu-category-wrapper">
-                                    <div className="header__menu-category-icon left">
+                                    <div
+                                        className="header__menu-category-icon left"
+                                        onClick={() => {
+                                            if (isMobile) {
+                                                listRef.current.style.transform = `translateX(0)`;
+                                            }
+                                        }}
+                                    >
                                         <i className=" header__icon bx bx-chevron-left"></i>
                                     </div>
                                     <div className="header__menu-navbar">
                                         <ul className="header__menu-list" ref={listRef}>
+                                        <li className="header__menu-item">
+                                                    <Link to={`/category/`} className="header__menu-link">
+                                                        All
+                                                    </Link>
+                                                </li>
                                             {categorise.data.map((e, i) => (
                                                 <li key={i._id} className="header__menu-item">
                                                     <Link to={`/category/${e.slug}`} className="header__menu-link">
                                                         {e.name}
                                                     </Link>
                                                 </li>
+                                                
                                             ))}
+                                           
                                         </ul>
                                     </div>
-                                    <div className="header__menu-category-icon right">
+                                    <div
+                                        className="header__menu-category-icon right"
+                                        onClick={() => {
+                                            if (isMobile) {
+                                                listRef.current.style.transform = `translateX(-60px)`;
+                                            }
+                                        }}
+                                    >
                                         <i className="header__icon bx bx-chevron-right"></i>
                                     </div>
                                 </div>

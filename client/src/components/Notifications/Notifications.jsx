@@ -47,13 +47,13 @@ const Notifications = ({ notification }) => {
     ) : (
         <li className={`header__notify-item ${notification.isRead ? "" : "active"}`}>
             <Link
-                to={`/user/${notification.parentId.userName}?notiId=${notification._id}`}
+                to={`/user/${notification?.parentId?.userName}?notiId=${notification._id}`}
                 className={`header__notify-link`}
             >
                 <div className="header__notify-menu">
-                    <Link to={`/user/${notification.parentId.userName}?notiId=${notification._id}`}>
+                    <Link to={`/user/${notification?.parentId?.userName}?notiId=${notification._id}`}>
                         <img
-                            src={notification.parentId.avatar ? notification.parentId.avatar : "/icons/avatar.png"}
+                            src={notification?.parentId?.avatar ? notification.parentId.avatar : "/icons/avatar.png"}
                             alt=""
                             className="header__notify-img"
                         />
@@ -62,9 +62,9 @@ const Notifications = ({ notification }) => {
                         <div className="header__notify-info-container">
                             <span className="header__notify-strong">
                                 <b>
-                                    {notification.parentId.displayName
-                                        ? notification.parentId.displayName
-                                        : notification.parentId.userName}{" "}
+                                    {notification?.parentId?.displayName
+                                        ? notification?.parentId?.displayName
+                                        : notification?.parentId?.userName}{" "}
                                 </b>
                             </span>
                             <span> follow you </span>

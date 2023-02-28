@@ -14,6 +14,7 @@ var schema = new mongoose.Schema({
     },
     content: [
         mongoose.Schema.Types.Mixed,
+       
     ],
     description: {
         type: 'string'

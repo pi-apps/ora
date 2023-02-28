@@ -11,7 +11,6 @@ import {
     upload
 } from '../middlewares/multers.js'
 const router = express.Router()
-const hiiu = [66]
 router.put('/:cateId', updateCategory)
 router.delete('/:cateId', deleteCategory)
 router.post('/create', createCategory)

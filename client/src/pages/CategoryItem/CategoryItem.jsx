@@ -267,7 +267,7 @@ const CategoryItem = () => {
                                             </button>
                                         </Link>
                                     </div>
-                                    <div className="sidebar__suggest box-shadow border">
+                                    {/* <div className="sidebar__suggest box-shadow border">
                                         <p className="sidebar__suggest-title border-bottom">
                                             {t("MAY_BE_GOOD_FOR_YOU")}
                                         </p>
@@ -313,7 +313,7 @@ const CategoryItem = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         </div>

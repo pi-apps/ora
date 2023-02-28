@@ -1,5 +1,7 @@
 @use "../../scss/" as *;
 .suggest {
+    margin-left: 12px;
+    margin-right: 12px;
     overflow: hidden;
 
     &__main {

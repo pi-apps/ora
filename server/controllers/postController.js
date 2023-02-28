@@ -5,6 +5,8 @@ import {
     UserModel
 } from "../models/UserModel.js";
 import { v2 as cloudinary } from 'cloudinary'
+import s3 from '../config/yandexcloud.js'
+import { baremetalsolution } from "googleapis/build/src/apis/baremetalsolution/index.js";
 export const getAllPosts = async (req, res, next) => {
     try {
         const posts = await PostModel.find().sort({createdAt:-1})
@@ -70,32 +72,40 @@ export const getPostsByUserName = async (req, res, next) => {
 export const createPost = async (req, res, next) => {
     try {
         const {userId} = req.user
+       const dublicate = await PostModel.find({title: req.body.title})
         if(req.body.title.length < 10 ){
             res.status(500).json({
-                err:"Tiêu đề bài viết không được để trống và phải nhiều hơn 10 kí tự"
+                err:"titlelimit"
             })
         }
-        if(req.body.content.blocks.length === 0 ){
+        else if (dublicate.length!==0) {
             res.status(500).json({
-                err:"Có lỗi khi tạo bài viết"
+                err:"dubpost"
             })
         }
-        const att = req.body.content.blocks.filter((url) =>{
-            if(url.type === "image") {
+         
+       else if(req.body.content.blocks.length < 2 ){
+            res.status(500).json({
+                err:"contentlimit"
+            })
+        }
+       else {
+         const att = req.body.content.blocks.filter((url) =>{
+           if(url.type === "image") {
               return url.data.file
             }
           })
           const url = att.map((e) => { 
               return e.data.file.url
           })
-        if(url.length !== 0){
+        if(url.length !== 0 ){
             const post = await PostModel.create({...req.body, author: userId,vote:userId,attachment:url[0].toString()})
             res.status(200).json({
                 status: 'OK',
                 data:{
                     slug:post.slug,
                     id:post._id,
-                    status: 'Bài viết được tạo thành công',
+                    status: 'createdpost',
                 }
             })
         }
@@ -106,14 +116,14 @@ export const createPost = async (req, res, next) => {
                 data:{
                     slug:post.slug,
                     id:post._id,
-                    status: 'Bài viết được tạo thành công',
+                    status: 'postcreated',
                 }
             })
         }
-
+    }
     } catch (err) {
         res.status(500).json({
-            err:"Có lỗi khi tạo bài viết"
+            err:"error"
         })
     }
 };
@@ -145,7 +155,7 @@ export const deletePost = async (req, res, next) => {
         await PostModel.findByIdAndDelete(postId)
         res.status(200).json({
             status: 'OK',
-            message:'Bài viết đã được xóa thành công'
+            message:'postdeleted'
         })
     } catch (err) {
         next(err)
@@ -153,15 +163,19 @@ export const deletePost = async (req, res, next) => {
 };
 export const uploadImage = async (req, res, next) => {
     try {
-        const fileStr = req.file;
-        const uploadResponse = await cloudinary.uploader.upload(fileStr.path, {
-            folder:"postimg"
-        });
-       
+        // const fileStr = req.file;
+        // const uploadResponse = await cloudinary.uploader.upload(fileStr.path, {
+        //     folder:"postimg"
+        // });
+       console.log(req.file.path)
+        let pathImage = req.file.path; 
+        let upload = await s3.Upload({ path: pathImage, // относительный путь до папки
+       }, '/piora/'); 
+       console.log(upload.Location)
         res.status(200).json({
             "success" : "1",
             "file": {
-                "url" : `https://${uploadResponse.url.slice(7)}`, 
+                "url" : upload.Location, 
             }
           
         })

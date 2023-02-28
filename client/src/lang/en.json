@@ -96,6 +96,18 @@
     "commentthispost": "Comment this post",
     "reply": "Reply ",
     "replythiscomment": "Reply this comment",
-    "note1": "Your username will also be used as an invitation code, invite your friends to get 0.1% commission from rewards of referral.",
-    "note2": "Username of the person who invited you to Piora"
+    "note1": "Your username will also be used as an invitation code, invite your friends to get rewards in Open Mainet",
+    "note2": "Username of the person who invited you to Piora",
+    "yourcontenthere" : "_Your Content Here_",
+    "post": "Post",
+    "updating": "Due to the error when interacting with Pi SDK, this feature is temporarily suspended to upgrade, your balance is safe.",
+    "titlelimit": "The title must contain more than 10 characters",
+    "contentlimit": "The content must contain at least two paragraphs",
+    "dubpost": "This post has existed",
+    "postcreated": "Created post",
+    "authpidone": "Auth with Pi Account success",
+    "dublicatedpiacc": "This Pi Account exist in Piora",
+    "markasread": "Mark all as read",
+    "insertpitip": "Enter tip amount:",
+    "limittime": "To avoid spam transactions causing system overload, you can only withdraw money once a day"
 }

@@ -117,7 +117,7 @@ const PostItem = ({ post }) => {
                                     </Link>
                                     <span className="time-read">4 min read</span>
                                 </div>
-                                <Link
+                                {/* <Link
                                     to={`/`}
                                     onClick={(e) => {
                                         handleSavePost(e, post._id);
@@ -130,7 +130,7 @@ const PostItem = ({ post }) => {
                                     ) : (
                                         <i className="bx bx-bookmark-alt"></i>
                                     )}
-                                </Link>
+                                </Link> */}
                             </div>
                             <div className="filter__content-main">
                                 <Link to={`/post/${post.slug}`}>
@@ -283,17 +283,17 @@ const PostItem = ({ post }) => {
                                     {isVote ? (
                                         <i className="vote-icon bx bxs-up-arrow like"></i>
                                     ) : (
-                                        <i className="bx bx-up-arrow"></i>
+                                        <i className="bx bx-xs bx-up-arrow post-icon"></i>
                                     )}
                                     <span className="post-icon">{voteCount}</span>
                                 </div>
-                                {/* <div className="filter__content-interactive-container">
+                                <div className="filter__content-interactive-container">
                                     <svg
                                         fill="#969696"
                                         _ngcontent-serverapp-c41=""
                                         width="14"
                                         height="14"
-                                        viewBox="0 0 20 10"
+                                        viewBox="0 2 20 10"
                                         xmlns="http://www.w3.org/2000/svg"
                                     >
                                         <path
@@ -303,14 +303,14 @@ const PostItem = ({ post }) => {
                                         ></path>
                                     </svg>
                                     <span className="post-icon">{post.views}</span>
-                                </div> */}
+                                </div>
                                 <Link to={`/post/${post.slug}`}>
                                     <div className="filter__content-interactive-container">
                                         <svg
                                             fill="#969696"
                                             color="#969696"
-                                            width="14"
-                                            height="19"
+                                            width="12"
+                                            height="12s"
                                             viewBox="0 0 18 19"
                                             xmlns="http://www.w3.org/2000/svg"
                                         >

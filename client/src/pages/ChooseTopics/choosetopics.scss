@@ -1,10 +1,12 @@
 @use "../../scss/" as *;
+
 .topics {
     height: 100vh;
     &__container {
         max-width: 1024px;
         margin: 0 auto;
-        padding-top: 10px;
+        padding-top: 150px;
+        
     }
     &__header {
         &-top {
@@ -52,4 +54,67 @@
             font-size: 14px;
         }
     }
+    
+}
+@include mobile {
+    .topics {
+    
+        &__container {
+            max-width: 100%;
+           max-height: 300px;
+            padding-top: 150px;
+            
+        }
+        &__header {
+            &-top {
+                display: flex;
+                justify-content: space-between;
+                &-title {
+                    font-size: 25px;
+                    font-weight: 700;
+                }
+                &-button {
+                    margin-top: 15px;
+                    color: $white;
+                    background-color: $blue;
+                    width: 135px;
+                    height: 40px;
+                    text-align: center;
+                    border-radius: 5px;
+                }
+            }
+        }
+        &__content {
+         display: flex;
+            &-container {
+                background-color: ghostwhite;
+                color: $black;
+                text-align: center;
+                box-shadow: 1px 1px 3px #3446cd;
+                border-radius: 4px;
+                width: 170px;
+                height: 40px;
+                cursor: pointer;
+                margin-bottom: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                &:hover {
+                    box-shadow: 1px 1px 8px grey;
+                }
+                &.active {
+                    background-color: rgb(47, 181, 250);
+                    color: white;
+                }
+            }
+            &-text {
+                font-size: 14px;
+            }
+        }
+        
+    }
+}
+
+.h {
+    display: flex;
 }

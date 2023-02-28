@@ -1,0 +1,59 @@
+.Banner {
+
+  width: 100%;
+  background: linear-gradient(25deg, #7fb4ff 10%, #7aa6e8 20%, #eeeeee 95%);
+}
+
+.Container {
+  height: 500px;
+  padding: 0 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+
+
+  @media only screen and (max-width: 600px) {
+    height: 400px;
+  //  flex-direction: column;
+  //  justify-content: unset;
+  //  gap: 40px;
+  //  align-items: flex-start;
+  }
+}
+
+.Top {
+  margin-bottom: 40px;
+}
+
+.H1 {
+  margin-bottom: 20px;
+  color: #073583;
+  font-size: xx-large;
+  // font-size: 60px;
+}
+
+.Para {
+  font-size: medium;
+  color: rgb(255, 255, 255);
+}
+
+.Button {
+  background-color: #162881;
+  border-radius: 9999rem;
+  font-size: 20px;
+  color: white;
+
+
+  padding: 10px 50px;
+  cursor: pointer;
+
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  transition: all 0.2s ease 0s;
+
+  &:hover {
+    background-color: #4368E4;
+  }
+
+  //background-image: linear-gradient(to right top, #3a57e0, #4368e4, #4f77e6, #5d86e8, #6e95e8, #84a2ea, #99afeb, #acbced, #c5cbf1, #dadcf5, #eeedfa, #ffffff);
+}

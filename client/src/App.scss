@@ -27,14 +27,19 @@ body {
     line-height: 1.5;
 
     @include mobile {
+        
         margin-bottom: 3rem;
-        margin-left: 12px;
-        margin-right: 12px;
+      
         header {
             max-width: 100%;
         }
         body {
             max-width: 100%;
+         
+        }
+        .post-icon {
+            font-size: 12px;
+            color: $gray;
         }
         .post__details-content-container {
             max-width: 100%;
@@ -45,9 +50,9 @@ body {
         .modal__content {
             max-width: 100%;
         }
-        #slideBar {
-            display: none;
-        }
+        // #slideBar {
+        //     display: none;
+        // }
         .user__profile-tabs {
             display: none;
         }
@@ -63,6 +68,7 @@ body {
         .user__profile-main {
             display: flex;
             width: 100%;
+            padding-top: 100px;
         }
         .row {
             display: block;

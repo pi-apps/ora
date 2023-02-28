@@ -67,3 +67,14 @@ export const readPostNotifications = async (req, res, next) => {
         res.json(error)
     }
 };
+export const readAllNoti = async (req, res, next) => {
+    const {userId} = req.user
+  try {
+     await NotificationModel.updateMany({user: userId}, {isRead:true} , {new: true, runValidator:true})
+        res.status(200).json({
+            status: 'ok',
+        })
+    }catch (error) {
+        res.json(error)
+    }
+};

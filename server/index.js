@@ -16,9 +16,9 @@ import notiMessage from './routers/notiMessage.js'
 import { connect } from './config/db.js'
 import {errorHandler} from './middlewares/errorHandler.js'
 import {fileURLToPath} from 'url';
-import { v2 as cloudinary } from 'cloudinary'
 import mountPaymentsEndpoints from './controllers/payments.js';
 import mountUserEndpoints from './controllers/payments.js';
+
 dotenv.config()
 const app = express();
 const PORT = process.env.APP_PORT;
@@ -27,11 +27,6 @@ const __dirname = path.dirname(__filename);
 // Payments endpoint under /payments:
 const paymentsRouter = express.Router();
 
-cloudinary.config({ 
-  cloud_name: '', 
-  api_key: '',
-  api_secret: ''
-});
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
@@ -95,7 +90,7 @@ app.get('/category', (req,res) => {
 });
 
 app.all('*',(req, res, next) => {
-  const err = new Error ('404')
+  const err = new Error ('Auth Failed')
   err.statusCode = 404
   next(err)
 })

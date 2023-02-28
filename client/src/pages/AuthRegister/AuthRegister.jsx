@@ -87,7 +87,7 @@ const AuthRegister = () => {
             {messages ? (
                 <div className="alert-auth ">
                     <div className={`uk-alert ${err ? "err" : ""}`}>
-                        <div>{messages}</div>
+                        <div>{t(messages)}</div>
                     </div>
                 </div>
             ) : (

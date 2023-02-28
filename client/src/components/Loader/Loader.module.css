@@ -23,7 +23,24 @@
 
 
 }
+.ContainerHomeLoader{
+    padding-top: 50px;
+    display: flex;
+    justify-content: center;
+}
+.HomeLoader {
+    transform: translate(-50%,-50%);
+ 
+ 
+    border: 4px solid #f3f3f3; 
+    border-top: 4px solid #5973c1;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    animation: spin 2s linear infinite;
 
+
+}
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }

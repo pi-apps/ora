@@ -7,14 +7,27 @@ import { donatePi } from "../../components/pisdk/pisdk.tsx";
 import "./adv.scss";
 import isPiBrowser from "../isPiBrowser/isPiBrowser";
 import { useTranslation } from "react-i18next";
+import ModalTipPi from "../modal/variants/ModalTipPi/ModalTipPi";
+import { useModalContext } from "../modal/ModalContext";
 const Adv = () => {
     const { t } = useTranslation();
     const posts = useSelector(allPostsState$);
+    const { openModal, destroyModal } = useModalContext();
+
     const donate = useCallback(async (e) => {
         e.preventDefault();
-        const piB =isPiBrowser()
-        if (!piB) return alert(t("notPiBrowser"))
-       else  donatePi("to Piora", 1, { To: "Piora" });
+        const piB = isPiBrowser();
+        if (!piB) return alert(t("notPiBrowser"));
+        else {
+            openModal(
+                <ModalTipPi
+                    onTipPi={(pi) => {
+                        donatePi("to Piora", pi, { To: "Piora" });
+                        destroyModal();
+                    }}
+                />
+            );
+        }
     }, []);
     return (
         <div className="adv">

@@ -12,7 +12,7 @@
     box-shadow: 0 10px 15px -3px rgba(47, 181, 250, 0.05), 0 4px 6px -2px rgba(47, 181, 250, 0.025);
   
     &__container {
-    
+     
         max-width: 100%;
         margin: 0 auto;
     }
@@ -119,12 +119,21 @@
     &__menu {
         &-category {
             &-wrapper {
-                display: flex;
-                align-items: center;
+                //display: flex;
+                //align-items: center;
+                //flex-wrap: wrap;
+
+                position: relative;
+                padding-right: 60px;// width of arrow right
+
+                @include mobile{
+                    max-width: 220px;
+                    padding-right: 20px;// width of arrow right
+                }
             }
 
             &-icon {
-                position: sticky;
+                position: absolute;
                 top: 0;
                 z-index: 2;
                 display: flex;
@@ -133,11 +142,20 @@
                 flex-shrink: 0;
                 width: 3.5rem;
                 font-size: 0.75rem;
-                padding-bottom: 15px;
+                //padding-bottom: 15px;
+
+                &.left{
+                    right: 100%;
+                    background: linear-gradient(270deg, #fff 25%, hsla(0, 0%, 100%, 0.9) 60%, hsla(0, 0%, 100%, 0));
+                }
 
                 &.right {
                     right: 0;
                     background: linear-gradient(270deg, #fff 25%, hsla(0, 0%, 100%, 0.9) 60%, hsla(0, 0%, 100%, 0));
+                }
+
+                @include mobile{
+                    width: 2.5rem;
                 }
             }
         }
@@ -150,25 +168,37 @@
         }
 
         &-navbar {
-            overflow-x: hidden;
-            overflow-y: hidden;
+            //overflow-x: hidden;
+            //overflow-y: hidden;
             max-width: 790px;
+            overflow-x:hidden;
+            padding-top: 2px;
+
+            //TODO;
+            //display: flex;
+            //position: relative;
         }
 
         &-list {
             display: flex;
             align-items: center;
-            width: fit-content;
             transition: all 200ms ease-in-out 0s;
             gap: 0 40px;
-            position: relative;
-            width: 100%;
-            overflow-x: hidden;
-            overflow-y: hidden;
-            white-space: nowrap;
+            //width: fit-content;
+            //position: relative;
+            //width: 100%;
+            //overflow-x: hidden;
+            //overflow-y: hidden;
+            //white-space: nowrap;
             user-select: none;
-            cursor: pointer;
+            //cursor: pointer;
             padding-bottom: 15px;
+
+            flex-wrap: nowrap;
+
+            @include mobile{
+                gap: 0 20px;
+            }
         }
 
         &-item {

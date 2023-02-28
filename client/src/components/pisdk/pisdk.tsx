@@ -41,8 +41,8 @@ type PaymentDTO = {
 type MyPaymentMetadata = {};
 type Direction = "user_to_app" | "app_to_user";
 type AppNetwork = "Pi Network" | "Pi Testnet";
-// type Scope = "username" | "payments" | "wallet_address"
-const config = { headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" } };
+const token = localStorage.getItem("token");
+const config = { headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" ,  authorization: `Bearer ${token}`,} };
 declare global {
     interface Window {
         Pi: any;
@@ -61,7 +61,7 @@ export async function Pisdk() {
 }
 
 const onIncompletePaymentFound = (payment: PaymentDTO) => {
-    console.log("Giao dịch không hoàn thành", payment);
+    console.log("Incomplete payment", payment);
     return axios.post("/payments/incomplete", { payment });
 };
 
@@ -69,26 +69,26 @@ const onIncompletePaymentFound = (payment: PaymentDTO) => {
 export async function donatePi(memo: string, amount: number, paymentMetadata: MyPaymentMetadata) {
     const paymentData = { amount, memo, metadata: paymentMetadata };
     const onIncompletePaymentFound = (payment: PaymentDTO) => {
-        console.log("Giao dịch không hoàn thành", payment);
-        return axios.post("/payments/incomplete", { payment });
+        console.log("Incomplete payment", payment);
+        return axios.post("/payments/incomplete", { payment }, config);
     };
 
     const onReadyForApproval = async (paymentId) => {
-        console.log("Đợi xác nhận giao dịch", paymentId);
+        console.log("Waiting for approve", paymentId);
         axios.post("/payments/approve", { paymentId, paymentData }, config);
     };
 
     const onReadyForCompletion = (paymentId, txid) => {
-        console.log("Đợi hoàn thành giao dịch", paymentId, txid);
+        console.log("Waiting for complete", paymentId, txid);
         axios.post("/payments/complete", { paymentId, txid, paymentData }, config);
     };
 
     const onCancel = (paymentId: string) => {
-        console.log("Đã hủy giao dịch", paymentId);
-        return axios.post("/payments/cancelled_payment", { paymentId });
+        console.log("Canceled payment", paymentId);
+        return axios.post("/payments/cancelled_payment", { paymentId }, config);
     };
     const onError = (error: Error) => {
-        console.log("Lỗi ", error);
+        console.log("Error ", error);
     };
 
     const ddd = async (config) => {
@@ -115,7 +115,7 @@ export async function donatePi(memo: string, amount: number, paymentMetadata: My
         piUser = await authenticatePiUser();
         if (piUser) ddd(paymentData);
     } catch (err) {
-        console.log("Lỗi: " + JSON.stringify(err));
+        console.log("Error: " + JSON.stringify(err));
     }
 }
 
@@ -139,20 +139,18 @@ export async function withdrawPi(balance, mail) {
             const piId = AuthPi.user.uid;
 
             const Piname = AuthPi.user.username;
-            console.log("Đang giao dịch");
+            console.log("Loading payment...");
             if (Piname === pioraUser) {
                 const withdrawtxid = await axios.post("/payments/withdraw", { piId, Piname, amount }, config);
                 if (withdrawtxid) {
-                    // alert(`Withdraw Success, Txid: ${withdrawtxid.data.txid}`);
                     return withdrawtxid.data.txid;
                 }
             } else {
-                // alert("Not You!");
                 throw new Error("Not You!");
             }
         }
     } catch (err) {
-        console.log("Lỗi: " + JSON.stringify(err));
+        console.log("Error: " + JSON.stringify(err));
         throw new Error(err.message);
     }
 }

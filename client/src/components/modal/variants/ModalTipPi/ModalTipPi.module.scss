@@ -1,0 +1,19 @@
+.Input{
+  padding: 4px;
+  border: 1px solid;
+  border-radius: 3px;
+  margin-bottom: 9px;
+  font-size: 18px;
+}
+.Button{
+  color: white;
+  min-width: 100px;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #102ca0;
+  transition: background-color 0.2s ease-in-out;
+  &:hover{
+    background-color: #102ca0;
+  }
+}

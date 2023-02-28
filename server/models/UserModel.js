@@ -5,20 +5,20 @@ const schema = new mongoose.Schema({
         type: 'string',
         unique:true,
         trim:true,
-        required:[true,'Tên tài khoản là bắt buộc và phải chứa từ 6 đến 30 ký tự'],
-        minlength:[6, 'Tên tài khoản là bắt buộc và phải chứa từ 6 đến 30 ký tự']
+        required:[true,'At least 6 characters'],
+        minlength:[6, 'At least 6 characters']
     },
     lang:{
         type:'string',
     },
-    socialIdFacebook:{
+    lastWithdraw:{
         type:'string',
     },
     password:{  
         type: 'string',
         trim:true,
-        required:[true,'Mật khẩu nên chứa từ 6 đến 100 ký tự'],
-        minlength:[6, 'Mật khẩu nên chứa từ 6 đến 100 ký tự']
+        required:[true,'At least 6 characters'],
+        minlength:[6, 'At least 6 characters']
     },
     mail: {
         type: 'string',

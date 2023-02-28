@@ -11,6 +11,8 @@ import { donatePi } from "../../components/pisdk/pisdk.tsx";
 import { useTranslation } from "react-i18next";
 import isPiBrowser from "../../components/isPiBrowser/isPiBrowser";
 import { isDate } from "moment";
+import ModalTipPi from "../../components/modal/variants/ModalTipPi/ModalTipPi";
+import { useModalContext } from "../../components/modal/ModalContext";
 const User = () => {
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -28,6 +30,8 @@ const User = () => {
     const { username } = useParams();
     const [postsSaved, setPostsSaved] = useState(null);
     const [isAdmin, setIsAdmin] = useState(false);
+
+    const { openModal, destroyModal } = useModalContext();
     const sliderSettings = {
         slidesToShow: 3,
         slidesToScroll: 1,
@@ -46,8 +50,8 @@ const User = () => {
     useEffect(() => {
         if (currentUser) {
             setUserId([currentUser.user._id]);
-            setisBlockedPost(currentUser.user.isBlockedAll)
-            setisBlockedCmt(currentUser.user.isBlockedCmt)
+            setisBlockedPost(currentUser.user.isBlockedAll);
+            setisBlockedCmt(currentUser.user.isBlockedCmt);
         }
     }, [currentUser]);
 
@@ -102,7 +106,16 @@ const User = () => {
         else {
             const userPi = currentUser.user.userName;
 
-            if (userPi) donatePi(`to ${userPi}`, 1, { To: "Piora" });
+            openModal(
+                <ModalTipPi
+                    onTipPi={(pi) => {
+                        if (userPi) {
+                            donatePi(`to ${userPi}`, pi, { To: "Piora" });
+                            destroyModal();
+                        }
+                    }}
+                />
+            );
         }
     }
     const handelUnFlow = useCallback(
@@ -150,14 +163,14 @@ const User = () => {
                 const option = {
                     method: "put",
                     url: `/api/v1/auth/block/`,
-                    data: {userId, type},
+                    data: { userId, type },
                     headers: {
                         authorization: `Bearer ${token}`,
                     },
                 };
                 await axios(option);
                 alert("OK");
-            setisBlockedCmt(true)
+                setisBlockedCmt(true);
             } catch (err) {}
         },
         [userId]
@@ -171,14 +184,14 @@ const User = () => {
                 const option = {
                     method: "put",
                     url: `/api/v1/auth/unblock/`,
-                    data: {userId, type},
+                    data: { userId, type },
                     headers: {
                         authorization: `Bearer ${token}`,
                     },
                 };
                 await axios(option);
                 alert("OK");
-                setisBlockedCmt(false)
+                setisBlockedCmt(false);
             } catch (err) {}
         },
         [userId]
@@ -192,14 +205,14 @@ const User = () => {
                 const option = {
                     method: "put",
                     url: `/api/v1/auth/block/`,
-                    data: {userId, type},
+                    data: { userId, type },
                     headers: {
                         authorization: `Bearer ${token}`,
                     },
                 };
                 await axios(option);
-              alert("OK");
-            setisBlockedPost(true)
+                alert("OK");
+                setisBlockedPost(true);
             } catch (err) {}
         },
         [userId]
@@ -213,14 +226,14 @@ const User = () => {
                 const option = {
                     method: "put",
                     url: `/api/v1/auth/unblock/`,
-                    data: {userId, type},
+                    data: { userId, type },
                     headers: {
                         authorization: `Bearer ${token}`,
                     },
                 };
                 await axios(option);
-              alert("OK");
-              setisBlockedPost(false);
+                alert("OK");
+                setisBlockedPost(false);
             } catch (err) {}
         },
         [userId]
@@ -273,14 +286,15 @@ const User = () => {
     useEffect(() => {
         if (userState.currentUser) {
             if (
-                userState.currentUser._id==='63eb04c5c38d69c8d78052a8'||
-                userState.currentUser._id==='63eae6f5c38d69c8d780506e' ||
-                userState.currentUser._id==='63eb6d41c38d69c8d78057e0'
-                 ) {
+                userState.currentUser._id === "63eb04c5c38d69c8d78052a8" ||
+                userState.currentUser._id === "63f3bd424fb92ea27f0431f8" ||
+                userState.currentUser._id === "63f05ffea938efc90857be35" ||
+                userState.currentUser._id === "63f76c461109e2acffb84849"
+            ) {
                 setIsAdmin(true);
             }
         }
-    }, [ currentUser]);
+    }, [userState.currentUser]);
     useEffect(() => {
         updateNoti();
     }, [updateNoti]);
@@ -365,33 +379,43 @@ const User = () => {
                                                           >
                                                               <span>{t("chat")}</span>
                                                           </button>
-                                                          {isAdmin ? ( 
-                                                        <div className="admin__profile-widget-button">
-                                                            {isBlockedPost ? (  <button
-                                                              className="admin__profile-widget-button-item"
-                                                              onClick={handleUnBlockAll}>
-                                                              <span>UnBlock Post</span>
-                                                          </button>) : (  <button
-                                                              className="admin__profile-widget-button-item"
-                                                              onClick={handleBlockAll}>
-                                                              <span>Block Post</span>
-                                                          </button>) }
-                                                          {isBlockedCmt ? (  <button
-                                                              className="admin__profile-widget-button-item"
-                                                              onClick={handleUnBlockCmt}>
-                                                              <span>UnBlock Cmt</span>
-                                                          </button>) : (  <button
-                                                            className="admin__profile-widget-button-item"
-                                                            onClick={handleBlockCmt}>
-                                                            <span>Block Cmt</span>
-                                                        </button>) }
-                                                           </div>
-
-
-
-                                                          ) :("")} 
+                                                          {isAdmin ? (
+                                                              <div className="admin__profile-widget-button">
+                                                                  {isBlockedPost ? (
+                                                                      <button
+                                                                          className="admin__profile-widget-button-item"
+                                                                          onClick={handleUnBlockAll}
+                                                                      >
+                                                                          <span>UnBlock Post</span>
+                                                                      </button>
+                                                                  ) : (
+                                                                      <button
+                                                                          className="admin__profile-widget-button-item"
+                                                                          onClick={handleBlockAll}
+                                                                      >
+                                                                          <span>Block Post</span>
+                                                                      </button>
+                                                                  )}
+                                                                  {isBlockedCmt ? (
+                                                                      <button
+                                                                          className="admin__profile-widget-button-item"
+                                                                          onClick={handleUnBlockCmt}
+                                                                      >
+                                                                          <span>UnBlock Cmt</span>
+                                                                      </button>
+                                                                  ) : (
+                                                                      <button
+                                                                          className="admin__profile-widget-button-item"
+                                                                          onClick={handleBlockCmt}
+                                                                      >
+                                                                          <span>Block Cmt</span>
+                                                                      </button>
+                                                                  )}
+                                                              </div>
+                                                          ) : (
+                                                              ""
+                                                          )}
                                                       </div>
-                                                      
                                                   )}
                                                   <div className="user__profile-widget-stats">
                                                       <div>
@@ -570,7 +594,6 @@ const User = () => {
                                                       >
                                                           <span>{t("chat")}</span>
                                                       </button>
-                                                     
                                                   </div>
                                                   <div className="user__profile-widget-stats">
                                                       <div>

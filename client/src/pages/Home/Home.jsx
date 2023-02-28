@@ -5,6 +5,7 @@ import Filter from "../../components/Filter/Filter";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../redux/actions";
 import { allPostsState$ } from "../../redux/selectors";
+import { Banner } from "../../components/Banner";
 
 const Home = () => {
     const [postsByCate] = useState(null);
@@ -38,6 +39,7 @@ const Home = () => {
     }, []);
     return (
         <main className="main">
+            <Banner />
             <div className="container">
                 <Suggest />
                 <div className="grid">

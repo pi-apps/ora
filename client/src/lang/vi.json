@@ -96,6 +96,18 @@
     "commentthispost": "Bình luận bài viết này",
     "reply": "Trả lời ",
     "replythiscomment": "Trả lời bình luận này",
-    "note1": "Hãy sử dụng tên người dùng như mã mời bạn bè và nhận thưởng nhé!",
-    "note2": "Người giới thiệu của bạn sẽ được bonus 0.1% những gì bạn nhận được."
+    "note1": "Hãy sử dụng tên người dùng như mã mời bạn bè và nhận thưởng khi Open Mainet nhé!",
+    "note2": "Tên người giới thiệu của bạn",
+    "yourcontenthere" : "_Nội dung bài viết_",
+    "post": "Đăng bài",
+    "updating": "Do lỗi khi tương tác với Pi SDK, tính năng rút tạm thời ngưng hoạt động để nâng cấp, số dư của bạn vẫn an toàn.",
+    "titlelimit": "Tiêu đề phải chứa hơn 10 ký tự",
+    "contentlimit": "Nội dung phải chứa ít nhất hai đoạn văn và ít nhất 50 ký tự",
+    "dubpost": "Bài viết này đã tồn tại",
+    "postcreated": "Đăng bài thành công",
+    "authpidone": "Auth with Pi Account success",
+    "dublicatedpiacc": "Tài khoản Pi Network này đã được sử dụng",
+    "markasread": "Đánh dấu đã đọc",
+    "insertpitip": "Nhập số lượng Pi ủng hộ:",
+    "limittime": "Để tránh giao dịch spam làm nghẽn hệ thống, bạn chỉ có thể rút tiền một lần trong ngày"
 }

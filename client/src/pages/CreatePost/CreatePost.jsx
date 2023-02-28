@@ -157,7 +157,7 @@ const CreatePost = () => {
                                                                             {error ? (
                                                                                 <div className="toast-mess-container">
                                                                                     <button ref={toast} className={`alert-toast-message err`}>
-                                                                                        {error}
+                                                                                        {t(error)}
                                                                                     </button>
                                                                                 </div>
                                                                             ) : (
@@ -220,7 +220,7 @@ const CreatePost = () => {
                                                                                             type="submit"
                                                                                             className="modal__button-content create"
                                                                                         >
-                                                                                            {t("save")}
+                                                                                            {t("post")}
                                                                                         </button>
                                                                                     </Link>
                                                                                 </div>
