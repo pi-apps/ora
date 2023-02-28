@@ -2,8 +2,8 @@
 import pi_backend_1 from "pi-backend";
 import dotenv_1 from "dotenv";
 dotenv_1.config();
-const apiKey = process.env.PI_API_KEY 
-const walletPrivateSeed = process.env.WALLET_PRIVATE_SEED 
+const apiKey = process.env.PI_API_KEY ;
+const walletPrivateSeed = process.env.WALLET_PRIVATE_SEED ;
 const pi = new pi_backend_1["default"](apiKey, walletPrivateSeed);
 export async function createWithdraw(payment) {
   try {
@@ -12,8 +12,7 @@ export async function createWithdraw(payment) {
     return tt;
   }
     catch(err) {
-      console.log("Lỗi 1: ", err); 
-    
+      console.log("Error 1: ", err.response.data); 
     }
 }
 export async function createTxid(hiiu) {
@@ -23,7 +22,7 @@ export async function createTxid(hiiu) {
     return txid;
   }
     catch(err) {
-      console.log("Lỗi 2: ", err); 
+      console.log("Error 2: ", err.response.data); 
     }
 }
 export async function completeWithdraw(lanh,hehe) {
@@ -34,7 +33,7 @@ export async function completeWithdraw(lanh,hehe) {
     return completedPayment;
   }
     catch(err) {
-      console.log("Lỗi 3: ", err); 
+      console.log("Error 3: ", err.response.data); 
     }
 }
 export async function incompleteWithdraw() {
@@ -43,7 +42,7 @@ export async function incompleteWithdraw() {
     return incompleteWithdraw;
   }
   catch(err) {
-    console.log("Lỗi 4: ", err); 
+    console.log("Error 4: ", err.response.data); 
   }
 }
 export async function cancelWithdraw(paymentID) {
@@ -53,7 +52,7 @@ export async function cancelWithdraw(paymentID) {
     return cancelWithdraw;
   }
   catch(err) {
-    console.log("Lỗi 5: ", err); 
+    console.log("Error 5: ", err.response.data); 
   }
 }
 
