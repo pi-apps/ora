@@ -30,6 +30,43 @@ const CreatePost = () => {
         category: "64d95dea763ef48b32485fb7",
         attachment: "",
     });
+//AntiLeft
+
+const [finishStatus, setfinishStatus] = useState(false);
+
+const onBackButtonEvent = (e) => {
+    e.preventDefault();
+    if (!finishStatus) {
+        if (window.confirm(t("confirmback"))) {
+            setfinishStatus(true)
+            //logic
+           navigate("/")
+        } else {
+            window.history.pushState(null, null, window.location.pathname);
+            setfinishStatus(false)
+        }
+    }
+}
+const handleBeforeUnload = (e) => {
+    e.preventDefault();
+    const message =
+      t("confirmback");
+    e.returnValue = message;
+    return message;
+  };
+  useEffect(() => {
+    window.history.pushState(null, null, window.location.pathname);
+    window.addEventListener('popstate', onBackButtonEvent);
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener('popstate', onBackButtonEvent); 
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+  
+ 
+
+
     useEffect(() => {
         const editor = new EditorJS(config());
         seteditor(editor);
@@ -40,16 +77,6 @@ const CreatePost = () => {
     useEffect(() => {
         getCategories();
     }, [getCategories]);
-    // const editorJS = new EditorJS({
-    //   onChange: async () => {
-    //     const data = await editorJS.save();
-    //     if (!equal(prevEditorJSData?.blocks, data.blocks)) {
-    //
-    //     }
-
-    //     prevEditorJSData = data;
-    //   },
-    // });
     const handleVisibleModal = useCallback(
         (e) => {
             setError(null);
@@ -142,7 +169,7 @@ const CreatePost = () => {
                                                                         <div id="editorjs" />
                                                                     </div>
                                                                     <div className="post__button">
-                                                                        <Link to="/">
+                                                                        <Link to="/" onClick={onBackButtonEvent}>
                                                                             <button className="post__button-main border save">{t("back")}</button>
                                                                         </Link>
                                             

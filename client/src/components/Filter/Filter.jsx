@@ -15,12 +15,12 @@ const Filter = ({ posts }) => {
     
     const sortTypes = {
         vote: {
-            fn: (a, b) => (b.vote.length-1) / Math.pow(((Date.now()-timestamp(b.createdAt))/(1000*3600))+2, 1.8) -( a.vote.length-1) / 
-            Math.pow(((Date.now()-timestamp(a.createdAt))/(1000*3600))+2, 1.8),
+            fn: (a, b) => (b.vote.length-1) / Math.pow(((Date.now()-timestamp(b.createdAt))/(1000*3600))+2, 1.1) -( a.vote.length-1) / 
+            Math.pow(((Date.now()-timestamp(a.createdAt))/(1000*3600))+2, 1.1),
         },
         view: {
-            fn: (a, b) =>  (b.views-1) / Math.pow(((Date.now()-timestamp(b.createdAt))/(1000*3600))+2, 1.8) -( a.views-1) / 
-            Math.pow(((Date.now()-timestamp(a.createdAt))/(1000*3600))+2, 1.8)
+            fn: (a, b) =>  (b.views-1) / Math.pow(((Date.now()-timestamp(b.createdAt))/(1000*3600))+2, 1.1) -( a.views-1) / 
+            Math.pow(((Date.now()-timestamp(a.createdAt))/(1000*3600))+2, 1.1)
         },
         comment: {
             fn: (a, b) => b.comment_count - a.comment_count,

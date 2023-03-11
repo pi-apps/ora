@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import { HomeLoader } from "../Loader/Loader";
 const Suggest = () => {
  const { t } = useTranslation();
+ const random = Math.floor(Math.random() * 10);
     const posts = useSelector(allPostsState$)
  if (!posts.data.length) return (<HomeLoader />);
    return (
@@ -21,7 +22,7 @@ const Suggest = () => {
                     <div className="row">
                
                         <div className="col c-12 m-5 l-5">
-                            { posts.data.slice(-69).sort((a, b) => b.views - a.views).slice(0,1).map((post, idx)=> (
+                            { posts.data.slice(-3,-2).map((post, idx)=> (
                                 
                                 <div className="suggest__content" key={idx}>
                                   
@@ -141,7 +142,7 @@ const Suggest = () => {
                         <div className="col c-12 m-7 l-7" id="slideBar">
                             <div className="gird">
                                 <div className="row">
-                                    {posts.data.slice(-69).sort((a, b) => b.views - a.views).slice(1,4).map((post, idx) => (
+                                    {posts.data.sort((a, b) => b.vote.length - a.vote.length).slice(random,random+3).map((post, idx) => (
                                         <div className="col l-12" key={idx}>
                                             <div className="suggest__content">
                                                 <div className="grid">

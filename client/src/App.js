@@ -6,8 +6,10 @@ import Header from "./pages/Header/Header";
 import Footer from "./pages/Footer/Footer";
 import Gototop from "./pages/Gototop/Gototop";
 import RoutesConfig from "./config/RoutesConfig";
-
+import ReactGA from 'react-ga';
 function App() {
+    const TRACKING_ID = "G-MP2DWJQTGP"; 
+    ReactGA.initialize(TRACKING_ID);
     return (
         <div className="App">
             <BrowserRouter>

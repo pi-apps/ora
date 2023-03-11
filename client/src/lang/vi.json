@@ -109,5 +109,6 @@
     "dublicatedpiacc": "Tài khoản Pi Network này đã được sử dụng",
     "markasread": "Đánh dấu đã đọc",
     "insertpitip": "Nhập số lượng Pi ủng hộ:",
-    "limittime": "Để tránh giao dịch spam làm nghẽn hệ thống, bạn chỉ có thể rút tiền một lần trong ngày"
+    "limittime": "Để tránh giao dịch spam làm nghẽn hệ thống, bạn chỉ có thể rút Pi một lần trong ngày",
+    "confirmback": "Bạn thật sự muốn rời khỏi? Những gì bạn đã viết sẽ không được lưu"
 }

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../redux/actions";
 import { userState$ } from "../../redux/selectors";
 import { useTranslation } from "react-i18next";
+import ReactGA from 'react-ga';
 const Register = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const { t } = useTranslation();
@@ -45,7 +46,12 @@ const Register = () => {
             setErrMessages(loginSuccess.err);
         } else if (loginSuccess.isLoggedIn === true) {
             localStorage.setItem("token", loginSuccess.token);
+            ReactGA.event({
+                category: 'User',
+                action: 'Created an Account'
+              });
             window.location.href = "/";
+
         }
     }, [loginSuccess, navigate]);
     return (

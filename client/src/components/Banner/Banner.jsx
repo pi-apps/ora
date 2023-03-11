@@ -20,7 +20,7 @@ function Banner() {
             <div className={S.Container}>
                 <div className={S.Top}>
                     <h1 className={S.H1}>Ora | Social Network for Pioneers</h1>
-                    <p className={S.Para}>Write - Share - Connection - Earning Pi</p>
+                    <p className={S.Para}>Write - Share - Connection - Earn Pi</p>
                 </div>
                 <button className={S.Button} onClick={handleGetStarted}>
                     Start
